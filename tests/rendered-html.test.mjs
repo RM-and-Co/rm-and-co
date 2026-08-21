@@ -13,9 +13,12 @@ test("renders the RM & Co. holding-company site", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /RM &amp; Co\./);
-  assert.match(html, /Building enduring enterprises/);
+  assert.match(html, /Holding Africa/);
   assert.match(html, /RM Digital/);
   assert.match(html, /Field Force/);
+  assert.match(html, /RM Agriculture/);
+  assert.match(html, /RM Energy/);
+  assert.match(html, /RM Property/);
   assert.match(html, /social-preview\.png/);
   assert.doesNotMatch(html, /Your site is taking shape|SkeletonPreview/);
 });
@@ -24,7 +27,7 @@ test("renders the RM Digital business page", async () => {
   const response = await render("/rm-digital");
   assert.equal(response.status, 200);
   const html = await response.text();
-  assert.match(html, /<h1>RM Digital<\/h1>/);
+  assert.match(html, /<h1>Data\. Intelligence\. Impact\.<\/h1>/);
   assert.match(html, /Field Force/);
   assert.match(html, /subsidiary of RM &amp; Co\./i);
 });

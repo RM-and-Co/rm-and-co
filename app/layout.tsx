@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     siteName: "RM & Co.",
     locale: "en_ZA",
     type: "website",
-    images: [{ url: "/social-preview.png", width: 1200, height: 630 }],
+    images: [{ url: "/social-preview.png", width: 1200, height: 630, alt: "RM & Co. — Holding Africa's Future" }],
   },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  icons: { icon: "/brand/rm-and-co/icon.png", shortcut: "/brand/rm-and-co/icon.png", apple: "/brand/rm-and-co/icon.png" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
