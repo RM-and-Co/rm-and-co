@@ -13,13 +13,14 @@ test("renders the RM & Co. holding-company site", async () => {
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /RM &amp; Co\./);
-  assert.match(html, /Holding Africa/);
   assert.match(html, /RM Digital/);
+  assert.match(html, /RM Capital/);
+  assert.match(html, /RM Industrial/);
+  assert.match(html, /RM Mobility/);
   assert.match(html, /Field Force/);
-  assert.match(html, /RM Agriculture/);
-  assert.match(html, /RM Energy/);
-  assert.match(html, /RM Property/);
   assert.match(html, /social-preview\.png/);
+  assert.doesNotMatch(html, /Holding Africa/);
+  assert.doesNotMatch(html, /RM Agriculture|RM Energy|RM Property|RM Ventures|RM Foundation/);
   assert.doesNotMatch(html, /Your site is taking shape|SkeletonPreview/);
 });
 
