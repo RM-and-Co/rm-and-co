@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "RM & Co. | Holding & Operating Company", template: "%s | RM & Co." },
-  description: "RM & Co. is a South African holding and operating company focused on digital products, mobility, capital and industrial capability.",
+  description: "RM & Co. is a South African holding and operating company spanning digital products, mobility, capital and industrial capability, with RM Risk launching soon.",
   metadataBase: new URL("https://rmandco.co.za"),
   openGraph: {
     title: "RM & Co. | Holding & Operating Company",
-    description: "A long-term holding and operating company for four focused businesses: digital, mobility, capital and industrial.",
+    description: "Discover RM Digital’s portfolio: FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive, and the upcoming launch of RM Risk.",
     url: "https://rmandco.co.za",
     siteName: "RM & Co.",
     locale: "en_ZA",
@@ -18,5 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to content</a>{children}</body></html>;
 }
