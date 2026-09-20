@@ -2,7 +2,7 @@ import RiskLogo from "./RiskLogo";
 
 const companies = [
   { name: "FleetOrbit", category: "Fleet technology", logo: "/brand/products/fleetorbit.png", copy: "Fleet management and connected-asset technology for clearer oversight of vehicles and operations.", href: "https://fleetorbit.co.za", action: "Visit FleetOrbit" },
-  { name: "Shopping Lyst", category: "Consumer technology", logo: null, copy: "A shopping platform in the RM Digital portfolio, bringing our technology focus into everyday consumer experiences.", href: "mailto:hello@rmandco.co.za?subject=Shopping%20Lyst%20enquiry", action: "Enquire about Shopping Lyst" },
+  { name: "Shopping Lyst", category: "Consumer technology", logo: "/brand/products/ShoppingLyst.png", copy: "A shopping platform in the RM Digital portfolio, bringing our technology focus into everyday consumer experiences.", href: "mailto:hello@rmandco.co.za?subject=Shopping%20Lyst%20enquiry", action: "Enquire about Shopping Lyst" },
   { name: "OpenWheels", category: "Vehicle marketplace", logo: "/brand/products/openwheels.png", copy: "A South African vehicle marketplace connecting people with vehicles and flexible ways to access them.", href: "https://openwheels.co.za", action: "Visit OpenWheels" },
   { name: "Orbit eDrive", category: "SME fleet & rent-to-own · In development", logo: null, copy: "A focused FleetOrbit edition for small and medium fleet operators and rent-to-own businesses. Planned scope connects customer applications, contracts, collections and vehicle lifecycle management. The complete commercial workflow is in development.", href: "mailto:hello@rmandco.co.za?subject=Orbit%20eDrive%20enquiry", action: "Enquire about Orbit eDrive" },
 ];
@@ -11,7 +11,7 @@ export default function Portfolio() {
   return <section className="section portfolio" id="portfolio">
     <div className="section-heading"><div><p className="section-no">The RM Digital portfolio</p><h2>Four businesses.<br />One digital home.</h2></div><p>RM Digital owns FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive. Each brings its own focus to a portfolio built around useful technology.</p></div>
     <div className="portfolio-grid">{companies.map((company, index) => <article className="portfolio-card" key={company.name}>
-      <div className="portfolio-top"><div className="product-logo">{company.logo ? <img src={company.logo} alt={`${company.name} logo`} /> : company.name === "Shopping Lyst" ? <span className="shopping-lyst-brand"><span className="shopping-lyst-mark">SL</span>Shopping <span>Lyst</span></span> : <span className="edrive-brand">Orbit eDrive</span>}</div><span className="portfolio-number">0{index + 1}</span></div>
+      <div className="portfolio-top"><div className="product-logo">{company.logo ? <img src={company.logo} alt={`${company.name} logo`} /> : <span className="edrive-brand">Orbit eDrive</span>}</div><span className="portfolio-number">0{index + 1}</span></div>
       <p className="portfolio-category">{company.category}</p><h3>{company.name}</h3><p className="portfolio-description">{company.copy}</p>
       <a className="text-link" href={company.href}>{company.action}<span aria-hidden="true">↗</span></a>
     </article>)}</div>
