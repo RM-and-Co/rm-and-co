@@ -23,12 +23,12 @@ test("renders the RM & Co. holding-company site", async () => {
 
 test("renders the RM Digital business page", async () => {
   const html = await render("/rm-digital");
-  assert.match(html, /<h1>Data\. Intelligence\. Impact\.<\/h1>/);
+  assert.match(html, /<h1[^>]*>Data\. Intelligence\. <em>Impact\.<\/em><\/h1>/);
   assert.match(html, /Field Force/);
   assert.match(html, /subsidiary of RM &amp; Co\./i);
 });
 
-const pages = ["/", "/rm-digital"];
+const pages = ["/", "/about", "/businesses", "/rm-digital", "/rm-mobility", "/rm-risk", "/contact"];
 
 test("every image has alt text and intrinsic dimensions, and its file ships in the export", async () => {
   for (const path of pages) {
@@ -63,10 +63,37 @@ test("the header has primary navigation and a mobile menu control", async () => 
   assert.match(html, /<nav[^>]*aria-label="Footer"/);
 });
 
-test("the group business cards show every unit logo once", async () => {
-  const html = await render();
-  for (const id of ["rm-digital-reversed", "rm-mobility", "rm-capital", "rm-industrial", "rm-risk"]) {
+test("the businesses page shows every unit logo", async () => {
+  const html = await render("/businesses");
+  for (const id of ["rm-digital", "rm-mobility", "rm-capital", "rm-industrial", "rm-risk"]) {
     assert.match(html, new RegExp(`/brand/web/${id}\\.png`));
   }
+});
+
+test("the RM Digital page lists the owned businesses", async () => {
+  const html = await render("/rm-digital");
   for (const name of ["FleetOrbit", "Shopping Lyst", "OpenWheels", "Orbit eDrive"]) assert.match(html, new RegExp(name));
+});
+
+test("RM Risk and RM Mobility have their own pages with every service line", async () => {
+  const risk = await render("/rm-risk");
+  assert.match(risk, /Launching soon/);
+  for (const line of ["Enterprise Risk Management", "Operational Risk &amp; Controls", "Governance, Risk &amp; Compliance \\(GRC\\)", "Insurance &amp; Claims Advisory", "Fleet, Asset &amp; Mobility Risk", "Supplier &amp; Contract Risk", "Health, Safety &amp; Environmental Risk", "Business Continuity &amp; Crisis Readiness"]) {
+    assert.match(risk, new RegExp(line));
+  }
+  const mobility = await render("/rm-mobility");
+  for (const line of ["Rent-to-Own Vehicles", "Full Maintenance Leasing", "Operating Rentals", "Managed Maintenance", "Fleet Audits", "Fleet Inspections", "Fleet Assessment Reporting"]) {
+    assert.match(mobility, new RegExp(line));
+  }
+});
+
+test("every page has exactly one h1 and is linked from the primary navigation", async () => {
+  for (const path of pages) {
+    const html = await render(path);
+    assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `${path} has one h1`);
+  }
+  const home = await render();
+  for (const href of ["/about", "/businesses", "/rm-digital", "/rm-mobility", "/rm-risk", "/contact"]) {
+    assert.match(home, new RegExp(`href="${href}/?"`));
+  }
 });

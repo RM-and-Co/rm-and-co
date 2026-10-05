@@ -1,113 +1,103 @@
 import Link from "next/link";
+import CountUp from "./components/CountUp";
+import CtaBand from "./components/CtaBand";
 import Logo from "./components/Logo";
-import type { LogoId } from "./components/logo-data";
-import MobilityServices from "./components/MobilityServices";
-import Portfolio, { RiskLaunch } from "./components/Portfolio";
-import SiteFooter from "./components/SiteFooter";
-import SiteHeader from "./components/SiteHeader";
+import PageHero from "./components/PageHero";
+import Reveal from "./components/Reveal";
+import SectionHead from "./components/SectionHead";
+import UnitPanels from "./components/UnitPanels";
+import { mobilityServices, portfolio, principles, riskServices } from "./data";
 
-const businesses: { number: string; name: string; state: string; tagline: string; copy: string; href: string; logo: LogoId }[] = [
-  { number: "01", name: "RM Digital", state: "Operating", tagline: "Data. Intelligence. Impact.", copy: "Owner of FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive. Also home to Field Force.", href: "/rm-digital", logo: "rm-digital-reversed" },
-  { number: "02", name: "RM Mobility", state: "Operating", tagline: "Smarter mobility. Stronger futures.", copy: "Fleet leasing, rentals, maintenance, audits, inspections and reporting. RM Mobility holds a part-ownership stake in Element Bridge.", href: "#rm-mobility", logo: "rm-mobility" },
-  { number: "03", name: "RM Capital", state: "Platform", tagline: "Invest. Grow. Transform.", copy: "Disciplined investment, corporate finance and strategic capital allocation.", href: "#contact", logo: "rm-capital" },
-  { number: "04", name: "RM Industrial", state: "Platform", tagline: "Engineering possibility.", copy: "Engineering, manufacturing and infrastructure-linked operating capability.", href: "#contact", logo: "rm-industrial" },
-  { number: "05", name: "RM Risk", state: "Launching soon", tagline: "Protecting value. Enabling confidence.", copy: "Enterprise and operational risk, governance and compliance, insurance and claims advisory, mobility risk and business resilience.", href: "#rm-risk", logo: "rm-risk" },
+const stats = [
+  { n: 5, label: "Business lines" },
+  { n: 4, label: "Digital businesses" },
+  { n: 7, label: "Mobility service lines" },
+  { n: 8, label: "Risk service lines" },
 ];
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#businesses", label: "Businesses" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#rm-mobility", label: "Mobility" },
-  { href: "#rm-risk", label: "RM Risk" },
-];
-
-const principles = [
-  { title: "Build before we multiply", copy: "Deepen the operating engine before adding unnecessary complexity." },
-  { title: "Own strategic capability", copy: "Prioritise technology, IP, distribution, data and operating know-how." },
-  { title: "Allocate deliberately", copy: "Every new venture competes for capital against the core." },
-  { title: "Compound over time", copy: "Prefer durable value creation over short-lived optics." },
-];
+const words = ["Digital", "Mobility", "Capital", "Industrial", "Risk"];
 
 export default function Home() {
   return <>
-    <SiteHeader
-      brand={{ href: "/", logo: "rm-and-co", label: "RM & Co. home", alt: "RM & Co." }}
-      links={navLinks}
-      cta={{ href: "#contact", label: "Contact" }}
+    <PageHero
+      tall
+      eyebrow="Holding & operating company"
+      title={<>Capability first.<br /><em>Then capital.</em></>}
+      lead="RM & Co. brings patient ownership and operating discipline to digital products, mobility, capital and industrial capability. Our next chapter introduces RM Risk."
+      actions={[{ href: "/businesses", label: "Explore the group" }, { href: "/about", label: "Our mandate", ghost: true }]}
+      aside={
+        <Link href="/rm-risk" className="spotlight">
+          <span className="launch-status">Launching soon</span>
+          <b>RM Risk</b>
+          <p>Protecting value. Enabling confidence.</p>
+          <span className="spotlight-link">Discover RM Risk <i aria-hidden="true">→</i></span>
+        </Link>
+      }
+      stats={<>{stats.map((s) => <div key={s.label}><b><CountUp to={s.n} /></b><span>{s.label}</span></div>)}</>}
     />
-    <main id="main-content">
-      <section className="hero" id="home">
-        <div className="hero-copy">
-          <p className="eyebrow">Holding &amp; operating company</p>
-          <h1>Capability first. Then capital.</h1>
-          <p>RM &amp; Co. brings patient ownership and operating discipline to digital products, mobility, capital and industrial capability. Our next chapter introduces RM Risk.</p>
-          <div className="actions"><Link className="button primary" href="#businesses">Explore the group</Link><Link className="button ghost" href="#about">Our mandate</Link></div>
-        </div>
-        <aside className="hero-aside">
-          <Logo id="rm-digital" alt="RM Digital — Data. Intelligence. Impact." className="logo-aside" priority />
-          <p>FleetOrbit. Shopping Lyst. OpenWheels. Orbit eDrive. Four businesses, now owned by RM Digital.</p>
-          <Link href="/rm-digital">Explore RM Digital <b aria-hidden="true">↗</b></Link>
-        </aside>
-        <div className="hero-index"><span><b>05</b> business lines, including RM Risk</span><span><b>01</b> disciplined group</span><span><b>ZA</b> South African base</span></div>
-      </section>
 
-      <section className="section manifesto" id="about">
-        <p className="section-no">01 / Our mandate</p>
-        <div>
-          <h2>One group. Multiple capabilities. A deliberately long view.</h2>
-          <div className="prose">
-            <p>RM &amp; Co. is the holdings company for a focused portfolio of operating businesses, products and future platforms. We build capability first, then allocate capital where the strategic and commercial case is strongest.</p>
-            <p>The group creates shared advantage across technology, distribution, data, relationships and disciplined execution—while presenting each unit&apos;s maturity honestly.</p>
-          </div>
-        </div>
-      </section>
+    <div className="marquee" aria-hidden="true">
+      <div className="marquee-track">
+        {[...words, ...words, ...words, ...words].map((w, i) => <span key={i}>{w}<i /></span>)}
+      </div>
+    </div>
 
-      <section className="section businesses" id="businesses">
-        <div className="section-heading">
-          <div><p className="section-no">02 / Businesses &amp; units</p><h2>An expanding group. A shared ambition.</h2></div>
-          <p>Operating businesses are identified clearly. Developing platforms earn their independence through performance, governance and strategic fit.</p>
-        </div>
-        <div className="business-grid">
-          {businesses.map((business) => (
-            <Link className={`company-card${business.name === "RM Digital" ? " featured" : ""}`} key={business.name} href={business.href}>
-              <div className="card-meta"><span className="card-index">{business.number}</span><small className="card-status">{business.state}</small></div>
-              <div className="company-logo"><Logo id={business.logo} alt="" /></div>
-              <h3 className="visually-hidden">{business.name}</h3>
-              <p className="tagline">{business.tagline}</p>
-              <p className="company-copy">{business.copy}</p>
-              <b className="card-link">Explore <i aria-hidden="true">↗</i></b>
-            </Link>
+    <section className="section statement">
+      <Reveal><p className="section-no">01 / Our mandate</p></Reveal>
+      <div className="statement-grid">
+        <Reveal as="h2">One group. Multiple capabilities. <em>A deliberately long view.</em></Reveal>
+        <Reveal className="prose" delay={120}>
+          <p>RM &amp; Co. is the holdings company for a focused portfolio of operating businesses, products and future platforms. We build capability first, then allocate capital where the strategic and commercial case is strongest.</p>
+          <p>The group creates shared advantage across technology, distribution, data, relationships and disciplined execution—while presenting each unit&apos;s maturity honestly.</p>
+          <Link className="text-link" href="/about">About RM &amp; Co. <span aria-hidden="true">→</span></Link>
+        </Reveal>
+      </div>
+    </section>
+
+    <section className="section dark businesses-home">
+      <SectionHead light no="02 / Businesses & units" title={<>An expanding group. <em>A shared ambition.</em></>} lead="Operating businesses are identified clearly. Developing platforms earn their independence through performance, governance and strategic fit." />
+      <Reveal><UnitPanels /></Reveal>
+    </section>
+
+    <section className="section spotlight-digital">
+      <SectionHead no="03 / RM Digital" title={<>Four businesses. <em>One digital home.</em></>} lead="RM Digital owns FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive, and builds products including Field Force." />
+      <div className="logo-wall">
+        {portfolio.map((c, i) => (
+          <Reveal key={c.name} delay={i * 80} className="logo-tile">
+            {c.logo ? <Logo id={c.logo} alt={c.name} /> : <span className="text-wordmark">Orbit eDrive</span>}
+            <small>{c.category.split(" · ")[0]}</small>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal className="section-cta"><Link className="button dark" href="/rm-digital">Explore RM Digital<span aria-hidden="true">→</span></Link></Reveal>
+    </section>
+
+    <section className="section split-feature">
+      <Reveal className="feature-card mobility">
+        <p className="section-no">04 / RM Mobility</p>
+        <h2>From vehicle access <em>to fleet performance.</em></h2>
+        <p>{mobilityServices.length} service lines spanning rent-to-own, leasing, rentals, maintenance, audits, inspections and reporting, alongside our part-ownership of Element Bridge.</p>
+        <Link className="text-link" href="/rm-mobility">Explore RM Mobility <span aria-hidden="true">→</span></Link>
+      </Reveal>
+      <Reveal className="feature-card risk" delay={120}>
+        <p className="section-no light">05 / RM Risk · Launching soon</p>
+        <h2>Expertise for a <em>more resilient tomorrow.</em></h2>
+        <ul className="chips">{riskServices.slice(0, 5).map((s) => <li key={s.title}>{s.title}</li>)}<li>+3 more</li></ul>
+        <Link className="text-link light" href="/rm-risk">Explore RM Risk <span aria-hidden="true">→</span></Link>
+      </Reveal>
+    </section>
+
+    <section className="section principles">
+      <div className="principles-grid">
+        <Reveal className="sticky-head"><p className="section-no light">06 / Operating principles</p><h2>Capital follows <em>capability.</em></h2></Reveal>
+        <ol>
+          {principles.map((p, i) => (
+            <Reveal as="li" key={p.title} delay={i * 80}><span>{String(i + 1).padStart(2, "0")}</span><div><strong>{p.title}</strong><p>{p.copy}</p></div></Reveal>
           ))}
-        </div>
-      </section>
+        </ol>
+      </div>
+    </section>
 
-      <Portfolio />
-      <MobilityServices />
-      <RiskLaunch />
-
-      <section className="section principles">
-        <p className="section-no light">03 / Operating principles</p>
-        <div className="principles-grid">
-          <div><p className="eyebrow">How we build</p><h2>Capital follows capability.</h2></div>
-          <ol>
-            {principles.map((principle, index) => (
-              <li key={principle.title}><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{principle.title}</strong><p>{principle.copy}</p></div></li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="section contact" id="contact">
-        <div><p className="section-no">04 / Work with RM &amp; Co.</p><h2>Building something that belongs in the portfolio?</h2></div>
-        <div><p>For operating partnerships, strategic opportunities and group enquiries, contact RM &amp; Co.</p><a className="button primary" href="mailto:hello@rmandco.co.za">hello@rmandco.co.za</a></div>
-      </section>
-    </main>
-    <SiteFooter
-      brand={{ href: "/", logo: "rm-and-co", alt: "RM & Co." }}
-      blurb="RM & Co. is the holding company of RM Digital. Our growing group includes the upcoming RM Risk business."
-      links={[{ href: "#about", label: "About" }, { href: "#businesses", label: "Businesses" }, { href: "/rm-digital", label: "RM Digital" }, { href: "#rm-mobility", label: "RM Mobility" }, { href: "#rm-risk", label: "RM Risk" }, { href: "#contact", label: "Contact" }]}
-      copyright="© 2026 RM & Co. · South Africa"
-    />
+    <CtaBand title="Building something that belongs in the portfolio?" copy="For operating partnerships, strategic opportunities and group enquiries, contact RM & Co." />
   </>;
 }
