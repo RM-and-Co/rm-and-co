@@ -101,7 +101,7 @@ test("every page has exactly one h1 and is linked from the primary navigation", 
 
 test("RM Industrial links to a complete Egoli operations demo", async () => {
   const html = await render("/businesses");
-  assert.match(html, /href="\/businesses\/rm-industrial\/egoli\/index.html"/);
+  assert.match(html, /href="\/businesses\/rm-industrial\/egoli\/"/);
   const base = new URL("../out/businesses/rm-industrial/egoli/", import.meta.url);
   const demo = await readFile(new URL("index.html", base), "utf8");
   assert.match(demo, /Egoli Operations Studio/);

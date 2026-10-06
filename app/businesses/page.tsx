@@ -35,7 +35,7 @@ export default function Businesses() {
                 ? <Link className="button dark" href={unit.href}>Explore {unit.name}<span aria-hidden="true">→</span></Link>
                 : <a className="button dark" href={mail(`${unit.name} enquiry`)}>Enquire about {unit.name}<span aria-hidden="true">→</span></a>}
               {unit.slug === "rm-industrial" && <div style={{ marginTop: "1rem" }}>
-                <a className="button dark" href="/businesses/rm-industrial/egoli/index.html">Open Egoli operations demo<span aria-hidden="true">↗</span></a>
+                <a className="button dark" href="/businesses/rm-industrial/egoli/">Open Egoli operations demo<span aria-hidden="true">↗</span></a>
                 <p style={{ fontSize: "0.85rem", marginTop: "0.75rem" }}>Interactive process maps and capacity planning. Illustrative scenarios; client inputs remain unconfirmed.</p>
               </div>}
             </div>
