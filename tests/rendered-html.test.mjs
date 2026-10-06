@@ -97,3 +97,14 @@ test("every page has exactly one h1 and is linked from the primary navigation", 
     assert.match(home, new RegExp(`href="${href}/?"`));
   }
 });
+
+
+test("RM Industrial links to a complete Egoli operations demo", async () => {
+  const html = await render("/businesses");
+  assert.match(html, /href="\/businesses\/rm-industrial\/egoli\/index.html"/);
+  const base = new URL("../out/businesses/rm-industrial/egoli/", import.meta.url);
+  const demo = await readFile(new URL("index.html", base), "utf8");
+  assert.match(demo, /Egoli Operations Studio/);
+  assert.doesNotMatch(demo, /Private client demo/);
+  for (const file of ["app.mjs", "model.mjs", "visuals.mjs", "style.css", "assets/egoli-logo.jpeg", "assets/egoli-gin-botanicals.jpeg", "assets/egoli-gin-outdoors.jpeg"]) await access(new URL(file, base));
+});

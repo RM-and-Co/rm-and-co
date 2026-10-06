@@ -21,3 +21,7 @@ Production domain: https://rmandco.co.za. The linked Sites project is recorded i
 ## Logos
 
 Pages display trimmed derivatives from `public/brand/web/`, rendered by `app/components/Logo.tsx`. They are generated from the approved originals in `public/brand/` by `python3 scripts/build-web-logos.py` (needs Pillow); do not edit them or `app/components/logo-data.ts` by hand. Size logos in CSS by setting `--area` (visual area) in the surrounding context rather than a fixed width, so every logo carries equal weight.
+
+## Egoli client demo
+
+The RM Industrial section on `/businesses/` links to `/businesses/rm-industrial/egoli/index.html`. The self-contained demo is served from `public/businesses/rm-industrial/egoli/`, copied from the neighbouring `rm-industrial-egoli/dist/` project. Its header identifies a public client demo, with a return link to the business section. Scenario values are illustrative and stored only in the visitor’s browser. No source PDFs are published.
