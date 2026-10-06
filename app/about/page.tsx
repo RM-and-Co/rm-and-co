@@ -41,7 +41,7 @@ export default function About() {
     </section>
 
     <section className="section dark">
-      <SectionHead light no="02 / Group structure" title={<>Five business lines. <em>One group.</em></>} lead="RM & Co. is the holding company of RM Digital, and the parent of the group’s business lines." />
+      <SectionHead light no="02 / Group structure" title={<>Five business lines. <em>One group.</em></>} lead="RM & Co. brings five business lines together under RM AND CO HOLDINGS (PTY) LTD." />
       <Reveal className="structure">
         <div className="structure-root"><b>RM &amp; Co.</b><small>Holding &amp; operating company</small></div>
         <ul className="structure-branches">

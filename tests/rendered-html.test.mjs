@@ -25,7 +25,7 @@ test("renders the RM Digital business page", async () => {
   const html = await render("/rm-digital");
   assert.match(html, /<h1[^>]*>Data\. Intelligence\. <em>Impact\.<\/em><\/h1>/);
   assert.match(html, /Field Force/);
-  assert.match(html, /subsidiary of RM &amp; Co\./i);
+  assert.match(html, /business line of RM &amp; Co\./i);
 });
 
 const pages = ["/", "/about", "/businesses", "/rm-digital", "/rm-mobility", "/rm-risk", "/contact"];
@@ -49,7 +49,7 @@ test("logos are served from the trimmed web derivatives, not the oversized origi
   for (const path of pages) {
     const html = await render(path);
     const sources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map((match) => match[1]);
-    for (const src of sources) assert.match(src, /^\/brand\/web\/[a-z-]+\.png$/, `${path}: ${src}`);
+    for (const src of sources.filter(src => src.startsWith("/brand/"))) assert.match(src, /^\/brand\/web\/[a-z-]+\.png$/, `${path}: ${src}`);
   }
 });
 

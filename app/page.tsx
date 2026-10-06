@@ -1,66 +1,46 @@
 import Link from "next/link";
-import CountUp from "./components/CountUp";
 import CtaBand from "./components/CtaBand";
 import Logo from "./components/Logo";
-import PageHero from "./components/PageHero";
 import Reveal from "./components/Reveal";
 import SectionHead from "./components/SectionHead";
 import UnitPanels from "./components/UnitPanels";
 import { mobilityServices, portfolio, principles, riskServices } from "./data";
 
-const stats = [
-  { n: 5, label: "Business lines" },
-  { n: 4, label: "Digital businesses" },
-  { n: 7, label: "Mobility service lines" },
-  { n: 8, label: "Risk service lines" },
-];
-
-const words = ["Digital", "Mobility", "Capital", "Industrial", "Risk"];
-
 export default function Home() {
   return <>
-    <PageHero
-      tall
-      eyebrow="Holding & operating company"
-      title={<>Capability first.<br /><em>Then capital.</em></>}
-      lead="RM & Co. brings patient ownership and operating discipline to digital products, mobility, capital and industrial capability. Our next chapter introduces RM Risk."
-      actions={[{ href: "/businesses", label: "Explore the group" }, { href: "/about", label: "Our mandate", ghost: true }]}
-      aside={
-        <Link href="/rm-risk" className="spotlight">
-          <span className="launch-status">Launching soon</span>
-          <b>RM Risk</b>
-          <p>Protecting value. Enabling confidence.</p>
-          <span className="spotlight-link">Discover RM Risk <i aria-hidden="true">→</i></span>
-        </Link>
-      }
-      stats={<>{stats.map((s) => <div key={s.label}><b><CountUp to={s.n} /></b><span>{s.label}</span></div>)}</>}
-    />
-
-    <div className="marquee" aria-hidden="true">
-      <div className="marquee-track">
-        {[...words, ...words, ...words, ...words].map((w, i) => <span key={i}>{w}<i /></span>)}
+    <section className="signature-hero">
+      {/* Pre-compressed static artwork: 95 KB, served directly by the static export. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="architecture" src="/images/rm-architecture.webp" alt="" width="1920" height="1081" fetchPriority="high" />
+      <div className="signature-content">
+        <p className="eyebrow rise">RM &amp; Co. / Holding &amp; operating company</p>
+        <h1 className="rise">Ambition.<br /><em>Made real.</em></h1>
+        <div className="signature-intro rise"><span className="fine-rule" /><p>We build capability.<br />We connect opportunity.<br />We take the long view.</p></div>
+        <Link href="/businesses" className="signature-link">Explore our world <span aria-hidden="true">↗</span></Link>
       </div>
-    </div>
+      <div className="hero-caption"><span>Independent thinking. Shared ambition.</span><span>Rooted in South Africa. Looking ahead.</span></div>
+    </section>
+    <div className="chapter-strip"><span>Five perspectives. One RM &amp; Co.</span><nav aria-label="Business lines"><Link href="/rm-digital">Digital</Link><Link href="/rm-mobility">Mobility</Link><Link href="/businesses#rm-capital">Capital</Link><Link href="/businesses#rm-industrial">Industrial</Link><Link href="/rm-risk">Risk</Link></nav></div>
 
     <section className="section statement">
       <Reveal><p className="section-no">01 / Our mandate</p></Reveal>
       <div className="statement-grid">
-        <Reveal as="h2">One group. Multiple capabilities. <em>A deliberately long view.</em></Reveal>
+        <Reveal as="h2">Built with purpose.<br /><em>Owned with conviction.</em></Reveal>
         <Reveal className="prose" delay={120}>
-          <p>RM &amp; Co. is the holdings company for a focused portfolio of operating businesses, products and future platforms. We build capability first, then allocate capital where the strategic and commercial case is strongest.</p>
-          <p>The group creates shared advantage across technology, distribution, data, relationships and disciplined execution—while presenting each unit&apos;s maturity honestly.</p>
+          <p>From technology that simplifies operations to mobility that keeps businesses moving, RM &amp; Co. brings specialist capabilities together under one ambitious South African company.</p>
+          <p>Our approach is practical: build useful businesses, develop strong partnerships and create value that lasts.</p>
           <Link className="text-link" href="/about">About RM &amp; Co. <span aria-hidden="true">→</span></Link>
         </Reveal>
       </div>
     </section>
 
     <section className="section dark businesses-home">
-      <SectionHead light no="02 / Businesses & units" title={<>An expanding group. <em>A shared ambition.</em></>} lead="Operating businesses are identified clearly. Developing platforms earn their independence through performance, governance and strategic fit." />
+      <SectionHead light no="02 / Businesses & units" title={<>Specialist focus.<br /><em>Collective strength.</em></>} lead="Discover the five business lines shaping our direction, from operating capabilities to our next chapter in risk." />
       <Reveal><UnitPanels /></Reveal>
     </section>
 
     <section className="section spotlight-digital">
-      <SectionHead no="03 / RM Digital" title={<>Four businesses. <em>One digital home.</em></>} lead="RM Digital owns FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive, and builds products including Field Force." />
+      <SectionHead no="03 / RM Digital" title={<>Ideas become products.<br /><em>Products create possibility.</em></>} lead="RM Digital owns FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive, and builds products including Field Force." />
       <div className="logo-wall">
         {portfolio.map((c, i) => (
           <Reveal key={c.name} delay={i * 80} className="logo-tile">

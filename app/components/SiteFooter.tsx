@@ -25,7 +25,8 @@ export default function SiteFooter() {
           <p>South Africa</p>
         </div>
       </div>
-      <p className="footer-base"><span>© 2026 RM &amp; Co. · South Africa</span><span>RM &amp; Co. is the holding company of RM Digital.</span></p>
+      <div className="footer-signature" aria-hidden="true">RM <em>&amp;</em> Co.</div>
+      <p className="footer-base"><span>© 2026 RM &amp; Co. · South Africa</span><span>RM AND CO HOLDINGS (PTY) LTD · 2026/789027/07</span></p>
     </footer>
   );
 }

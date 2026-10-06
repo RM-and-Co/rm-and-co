@@ -19,7 +19,7 @@ export default function RmDigital() {
     <PageHero
       eyebrow="RM & Co. / Digital business"
       title={<>Data. Intelligence. <em>Impact.</em></>}
-      lead="The digital home of FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive. RM Digital is a subsidiary of RM & Co. We own and build businesses that bring useful technology into everyday life and real operations."
+      lead="The digital home of FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive. RM Digital is a business line of RM & Co. We own and build businesses that bring useful technology into everyday life and real operations."
       actions={[{ href: "#portfolio", label: "Explore our businesses" }, { href: "/businesses", label: "Back to the group", ghost: true }]}
       aside={<div className="aside-card"><span className="aside-label">Flagship product</span><Logo id="field-force" alt="Field Force" className="logo-aside" priority /><p>A sales-performance and insurance-distribution workflow platform for field teams, operations and compliance.</p><a href="https://fieldforce.rmandco.co.za">Visit product site <i aria-hidden="true">↗</i></a></div>}
       stats={<><div><b>SW</b><span>Software</span></div><div><b>AI</b><span>Intelligence</span></div><div><b>AN</b><span>Analytics</span></div><div><b>CL</b><span>Cloud</span></div></>}
@@ -27,17 +27,17 @@ export default function RmDigital() {
 
     <section className="section" id="portfolio">
       <SectionHead no="01 / The RM Digital portfolio" title={<>Four businesses. <em>One digital home.</em></>} lead="RM Digital owns FleetOrbit, Shopping Lyst, OpenWheels and Orbit eDrive. Each brings its own focus to a portfolio built around useful technology." />
-      <div className="portfolio-grid">
+      <div className="portfolio-editorial">
         {portfolio.map((c, i) => (
-          <Reveal as="article" key={c.name} delay={(i % 2) * 100} className="portfolio-card">
-            <div className="portfolio-top">
+          <Reveal as="article" key={c.name} delay={(i % 2) * 100} className={`portfolio-story portfolio-story-${i + 1}`}>
+            <div className="portfolio-cover">
               <div className="product-logo">{c.logo ? <Logo id={c.logo} alt="" /> : <span className="text-wordmark" aria-hidden="true">Orbit eDrive</span>}</div>
               <span className="portfolio-number">{String(i + 1).padStart(2, "0")}</span>
             </div>
-            <h3 className="visually-hidden">{c.name}</h3>
+            <div className="portfolio-story-copy"><h3>{c.name}</h3>
             <p className="portfolio-category">{c.category}</p>
             <p className="portfolio-description">{c.copy}</p>
-            <a className="text-link" href={c.href}>{c.action}<span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={c.href}>{c.action}<span aria-hidden="true">↗</span></a></div>
           </Reveal>
         ))}
       </div>

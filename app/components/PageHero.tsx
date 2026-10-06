@@ -11,11 +11,11 @@ type PageHeroProps = {
   tall?: boolean;
 };
 
-/** Dark, animated page opener shared by every page. The h1 is the only h1 on each page. */
+/** Editorial page opener; each route has one primary heading. */
 export default function PageHero({ eyebrow, title, lead, actions, aside, stats, tall }: PageHeroProps) {
   return (
     <section className={`hero${tall ? " hero-tall" : ""}${aside ? " has-aside" : ""}`}>
-      <div className="hero-bg" aria-hidden="true"><i className="orb orb-a" /><i className="orb orb-b" /><i className="grid-lines" /></div>
+      <div className="hero-insignia" aria-hidden="true">RM<span>&amp; Co.</span></div>
       <div className="hero-copy">
         <p className="eyebrow rise" style={{ "--i": 0 } as React.CSSProperties}>{eyebrow}</p>
         <h1 className="rise" style={{ "--i": 1 } as React.CSSProperties}>{title}</h1>
