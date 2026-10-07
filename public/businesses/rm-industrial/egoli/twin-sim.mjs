@@ -96,7 +96,7 @@ export function step(s,dt=.25){
 export function queues(s){const c=s.cfg,aged=s.lots.filter(l=>l.state==='dwell'&&s.t-l.t0>=c.dwell).reduce((a,l)=>a+l.qty,0),ratio=(a,b)=>b>0?a/b:a>0?Infinity:0;
  return{qa:{qty:aged,days:ratio(aged,c.lotSize*c.qaWindows.length)},bottling:{qty:s.released,days:ratio(s.released,c.bottlingRate*bottlingHours(c))},packing:{qty:s.filled,days:ratio(s.filled,c.packRate*bottlingHours(c))},dispatch:{qty:s.fg,days:ratio(s.fg,c.truckCap*c.dispatchWindows.length)}};
 }
-function detect(s){const q=queues(s);let pick=null,max=.6;if(backlog(s)>s.cfg.demandMean*.5){for(const id of ['qa','bottling','packing','dispatch'])if(q[id].days>max){max=q[id].days;pick=id;}if(s.kits<1&&s.released>0)pick='stores';if(!pick&&s.st.upstream.util>.85)pick='upstream';}
+function detect(s){if(s.t<48)return;const q=queues(s);let pick=null,max=.6;if(backlog(s)>s.cfg.demandMean*.5){for(const id of ['qa','bottling','packing','dispatch'])if(q[id].days>max){max=q[id].days;pick=id;}if(s.kits<1&&s.released>0)pick='stores';if(!pick&&s.st.upstream.util>.85)pick='upstream';}
  if(pick===s.bnCand)s.bnCount++;else{s.bnCand=pick;s.bnCount=1;}
  if(s.bnCount>=8&&s.bottleneck!==pick){s.bottleneck=pick;if(pick)log(s,'warn',`Constraint candidate: ${STAGES.find(x=>x.id===pick).short}. Queue heuristic; validate experimentally.`);}
 }
