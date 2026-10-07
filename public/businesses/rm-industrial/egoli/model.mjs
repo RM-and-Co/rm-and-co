@@ -35,3 +35,24 @@ export function calculate(x){
  ];
  return {errors,stages,complete,supply,output,limits,requirements};
 }
+
+// Constraint ladder: lift each binding stage in turn (treated as unlimited) and record what limits output next.
+// Planning aid only: it ignores the cost and feasibility of each lift.
+export function ladder(r,demand){
+ if(!r.complete)return [];
+ const vals=Object.fromEntries(r.stages.map(s=>[s.id,s.value]));const names=Object.fromEntries(r.stages.map(s=>[s.id,s.name]));names.demand='Demand';
+ const steps=[];let lifted=[];
+ for(let i=0;i<=r.stages.length;i++){
+  const supply=Math.min(...Object.values(vals));const out=Math.min(supply,demand);
+  const binding=[...Object.entries(vals).filter(([,v])=>Math.abs(v-out)<.0001).map(([id])=>id),...(Math.abs(demand-out)<.0001?['demand']:[])];
+  steps.push({output:Math.floor(out),limits:binding.map(id=>({id,name:names[id]})),lifted:[...lifted]});
+  if(binding.includes('demand'))break;
+  lifted=binding.map(id=>({id,name:names[id]}));binding.forEach(id=>{vals[id]=Infinity});
+ }
+ return steps;
+}
+// Bottling pace implied by a daily volume (finished-strength litres) at a given bottle size and shift length.
+export function scaleCheck(litresPerDay,size,hours){
+ if(!(litresPerDay>0&&size>0&&hours>0))return null;
+ const perDay=litresPerDay/size;return {perDay,perHour:perDay/hours};
+}
