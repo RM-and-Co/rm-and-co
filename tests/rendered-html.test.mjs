@@ -108,3 +108,12 @@ test("RM Industrial links to a complete Egoli operations demo", async () => {
   assert.doesNotMatch(demo, /Private client demo/);
   for (const file of ["app.mjs", "model.mjs", "visuals.mjs", "style.css", "assets/egoli-logo.jpeg", "assets/egoli-gin-botanicals.jpeg", "assets/egoli-gin-outdoors.jpeg"]) await access(new URL(file, base));
 });
+
+
+test("Egoli twin ships its offline engine and local 3D dependencies", async () => {
+  const base = new URL("../out/businesses/rm-industrial/egoli/", import.meta.url);
+  const html = await readFile(new URL("twin.html", base), "utf8");
+  assert.match(html, /No live plant connection/);
+  assert.match(html, /not a surveyed facility/);
+  for (const file of ["twin.mjs", "twin-sim.mjs", "twin.css", "vendor/three.module.js", "vendor/controls/OrbitControls.js", "vendor/THREE-LICENSE.txt"]) await access(new URL(file, base));
+});

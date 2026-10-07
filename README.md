@@ -25,3 +25,14 @@ Pages display trimmed derivatives from `public/brand/web/`, rendered by `app/com
 ## Egoli client demo
 
 The RM Industrial section on `/businesses/` links to `/businesses/rm-industrial/egoli/`. The self-contained demo is served from `public/businesses/rm-industrial/egoli/`, copied from the neighbouring `rm-industrial-egoli/dist/` project. Its header identifies a public client demo, with a return link to the business section. Scenario values are illustrative and stored only in the visitor’s browser. No source PDFs are published.
+
+
+### Egoli workflow twin
+
+`/businesses/rm-industrial/egoli/twin/` is a discrete-time scenario simulator, not a connected or validated plant twin. Its source of truth lives in this repository under `public/businesses/rm-industrial/egoli/twin*`; avoid overwriting these files when copying the neighbouring demo. The 3D layout is illustrative. Operating parameters, roles, shifts and demand are unconfirmed assumptions, editable in Model basis.
+
+The engine uses quarter-hour ticks, separate deterministic random streams, finite buffers, explicit quality dispositions, material/kit conservation, whole-unit dispatch, due-date orders and a seven-day due-cohort OTIF. BE denotes bottle equivalent at finished strength, not a verified bottle size or spirit ABV. Held lots require a simulated decision after the assumed review delay; they never release automatically. Queue pressure suggests a constraint candidate and does not establish causality.
+
+Experiment lab compares fresh fourteen-day baseline and intervention runs using identical opening stocks, seed and stochastic streams. It excludes ad hoc disruptions and operator decisions in the inspection run. One-seed results are illustrative; investment decisions require calibrated inputs and replicated trials. Exports contain the configuration, run ledger, orders, lots and recorded dispositions. No plant commands are issued. Aggregate tank occupancy does not enforce physical vessel assignment; CIP, recipes, energy, shared labour and financial valuation are outside scope.
+
+Three.js 0.160.0 and OrbitControls are vendored locally under `vendor/` with the MIT licence. Google Fonts are optional with system fallbacks. The inspector and simulator remain usable without WebGL. `npm test` builds the site and runs rendered-export and simulation-integrity tests, including conservation across multiple seeds and disruptions, capacity bounds, holds, dispatch schedules and repeatability.
