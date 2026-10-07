@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="RM Industrial digital twin concept for Egoli Distillery: a simulated plant with live bottleneck markers and dashboards."><title>Egoli Digital Twin · RM Industrial</title><link rel="icon" href="assets/rm-industrial.png"><link rel="stylesheet" href="twin.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head>
+<body><div id="app">
+<header class="bar"><a class="back" href="./" aria-label="Back to the Egoli operations studio">← Operations studio</a><div class="title"><img src="assets/egoli-logo.jpeg" alt="" width="30" height="30"><div><strong>Egoli Digital Twin</strong><span>RM Industrial · concept demonstration</span></div></div><div class="sim-badge" role="note"><b>SIMULATED DATA</b><span>Illustrative. Not measured at Egoli.</span></div><div class="clock" id="clock" aria-live="off">Mon 00:00</div></header>
+<main>
+<section id="stage" aria-label="3D model of the distillery"><canvas id="scene" aria-label="Interactive 3D plant. Use the stage list to inspect each area with a keyboard." role="img"></canvas><div id="labels" aria-hidden="true"></div>
+<div class="hud top"><button id="play" class="btn" aria-pressed="true">Ⅱ Pause</button><div class="seg" role="group" aria-label="Simulation speed"><button data-speed="0" class="on">1×</button><button data-speed="1">4×</button><button data-speed="2">12×</button></div><button id="reset" class="btn">Reset plant</button></div>
+<div id="story" class="story" hidden></div>
+<div class="hud bottom"><span><i class="dot run"></i>Running</span><span><i class="dot starved"></i>Starved</span><span><i class="dot blocked"></i>Blocked</span><span><i class="dot down"></i>Stopped</span><span><i class="dot off"></i>Off shift</span><span><i class="dot bn"></i>Bottleneck</span><em>Drag to orbit · scroll to zoom · click an area</em></div>
+<div id="fallback" hidden>The 3D view needs WebGL. The dashboards on the right still work.</div></section>
+<aside id="side">
+<div class="kpis" id="kpis"></div>
+<div class="card"><h2>Value chain status</h2><div id="stages" class="stages"></div></div>
+<div class="card" id="detail"></div>
+<div class="card"><h2>Dispatched vs demand · 14 days</h2><div id="chart"></div></div>
+<div class="card"><h2>Try the levers</h2><p class="note">Change the plant and watch the bottleneck move down the chain.</p><div id="levers" class="levers"></div><button id="story-btn" class="btn gold">▶ Play the guided story</button><h2 class="sub">Inject a disruption</h2><div class="levers" id="disrupt"></div></div>
+<div class="card"><h2>Event log</h2><ol id="log" class="log"></ol></div>
+<p class="foot">Every figure is synthetic and exists to show what becomes visible once the value chain is measured. Rates, capacities and disruption frequencies are placeholders until Egoli's baseline is captured.</p>
+</aside></main></div><script type="module" src="twin.mjs"></script></body></html>

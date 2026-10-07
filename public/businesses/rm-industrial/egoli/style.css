@@ -17,3 +17,5 @@
 @media (prefers-reduced-motion:reduce){.rung,.rung-fill{animation:none;opacity:1;transform:none}}
 
 #ladder.seen .rung,#ladder.seen .rung-fill{animation:none;opacity:1;transform:none}
+
+a.nav{text-decoration:none;display:block}.twin-link{border:1px solid #ffffff22;margin-top:6px}
