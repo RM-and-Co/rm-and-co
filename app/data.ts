@@ -1,6 +1,6 @@
 import type { LogoId } from "./components/logo-data";
 
-export const EMAIL = "hello@rmandco.co.za";
+export const EMAIL = "info@rmandco.co.za";
 export const mail = (subject: string) => `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`;
 
 export type Unit = {
